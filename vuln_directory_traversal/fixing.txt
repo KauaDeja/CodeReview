@@ -1,0 +1,13 @@
+Entendendo o fluxo da função.
+
+A funcao está recebendo como argumento a variavel $user. Cada usuário tera sua pasta, sendo "files/$user" a base. Se esta pasta base não existir ela será criada. E como retorno um diretório vai ser listado, os diretorios filho e pai também, mas a função array_diff() remove eles.
+
+Vulnerabilidade
+
+A vulnerabilidade neste caso existe na linha 2. quando o usuário coloca seu user, porque essa entrada não está sendo tratada, assim, o atacante pode inserir um nome como "../../../etc" e a função scandir lista os arquivos do diretorio que o usuario passou.
+
+Como mitigar
+
+Para mitigar essa vulnerabilidade podemos fazer o uso das funções basename() e realpath().
+ 
+A basename() que retorna somente a parte do nome do arquivo, entao, se o usuario inserir $user = "../../../etc/passwd", a função interpretará como "passwd". A realpath() retorna somente o caminho absoluto, ou seja se o usuario passar como input "../../../etc/passwd" tera como resultado "/etc/passwd" e nada será listado por causa da primeira função.
