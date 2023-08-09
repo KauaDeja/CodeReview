@@ -10,7 +10,7 @@ function get_all_files_dir($user) {
 
 // Substitua pelo nome de usuário desejado
 $username = "../../../etc/passwd";
-$files = list_files_for_user($username);
+$files = get_all_files_dir($use);
 ?>
 
 <!DOCTYPE html>
