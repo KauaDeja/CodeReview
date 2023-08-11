@@ -1,10 +1,16 @@
 <?php
+
 function addfile($user) {
-    //files/druida/teste.pdf
-    $file = "files/" . basename($user) . "/" . basename($_FILES["file"]["name"]);
-    if (!preg_match("/\.pdf$/", $file)) {
+    $file = "files/" . basename($user) . "/" . md5($_FILES["file"]["name"]) . basename($_FILES["file"]["name"]);
+    $allowedMimeTypes = ['application/pdf'];
+    $mimetype = mime_content_type($_FILES["file"]["tmp_name"]);
+
+    if (!preg_match("/\.pdf$/", $file)) { //Se a string nao der match com a expressao, vai dar erro. 
         return "Only PDF files are allowed";
-    } elseif (!move_uploaded_file($_FILES["file"]["tmp_name"], $file)) {
+    
+    } elseif (!in_array($mimetype, $allowedMimeTypes)){
+        return "No hackers";
+    }elseif (!move_uploaded_file($_FILES["file"]["tmp_name"], $file)) {
         return "Sorry, there was an error uploading your file.";
     }
     return "File uploaded successfully!";
