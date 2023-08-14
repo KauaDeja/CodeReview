@@ -1,0 +1,11 @@
+Fluxo da funcionalidade
+
+O usuario podera fazer o upload de um arquivo em PDF somente nessa extensao. O upload sera feito para a pasta dele em "/files/$username/filename".
+
+Vulnerabilidade - File Upload
+
+A vulnerabilidade esta na linha 5, pois a expressao regular pode ser bypassada. Se o usuario tentar um metodo de dupla extensao, por exemplo, "filename.php.pdf" ele vai conseguir inserir um arquivo que nao seja php.
+
+Como mitigar
+
+	Prevenir contra extensao dupla: Aleatorizar o nome do arquivo que o usuario esta inserindo. Verificar o MIME(Media Type) do arquivo, assim, mesmo se a extensao for trocada o atacante vai dar erro.
