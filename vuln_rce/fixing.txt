@@ -1,0 +1,11 @@
+Entendendo o fluxo da aplicação
+
+Nesta aplicação o usuário pode inserir um valor de 1 à 4 que será a quantidade de vezes que o ping será executado.
+
+Vulnerabilidade
+
+A vulnerabilidade deste trecho de código está quando a entrada do usuário não está sendo sanitizada. Logo, se um atacante tentar inserir uma payload como "index.php?count=1;id" ele conseguirá executar outros comando além do ping.
+
+Mitigação
+
+Para mitigar a vulnerabilidade seguinte é preciso tratar a entrada do usuário e evitar ao máximo usar funções de execução direta do sistema, como por exemplo, exec,passthru, shell_exec e system. E além disso, é importante tratar a saída usando htmlspecialchars,já que neste caso tem um possível risco de HTML Injection.
