@@ -1,0 +1,13 @@
+Fluxo do código
+
+As partes do jwt são separadas com o delimitador "." pela funcão explode. Depois e criado um array com os diferentes algoritmos que o jwt vai conter. Em seguida, o código pega a primeira parte do jwt e decodifica para json, contando que se houver caracteres invalidos ele cause um erro. Por fim, e feito um laco para verificar e o algoritmo e um dos definidos no array acima.
+
+
+Vulnerabilidade
+
+Existem varias vulnerabilidades neste trecho de código, contudo, a mais importante e que o código não verifica estritamente se o algoritmo que foi definido e realmente o que esta sendo decodificado, portanto, vamos tratar esse ponto.
+
+
+Mitigacão
+
+Para mitigar vamos trocar a funcão para base64_decode que fara quase a mesma coisa que a anterior e adicionar o último argumento como true, para verificar estritamente os caracteres que estão sendo decodificados. E por fim, vamos fazer um laco para verificar se o algoritmo do jwt que esta sendo decodificado e um dos que estão no array.
